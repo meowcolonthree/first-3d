@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://sflc70nn4btf"]
+
+[ext_resource type="Script" uid="uid://cdxnxwx8glijm" path="res://scripts/pause_menu.gd" id="1_n87rw"]
+
+[node name="PauseMenu" type="Control" unique_id=2130924713]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n87rw")
+
+[node name="Pause" type="MarginContainer" parent="." unique_id=1713853086]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -216.0
+offset_top = 64.0
+offset_right = 216.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause" unique_id=295780535]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="Pause/VBoxContainer" unique_id=1452596824]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Pause/VBoxContainer" unique_id=89805630]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="Quit" type="Button" parent="Pause/VBoxContainer" unique_id=774592003]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="Settings" type="MarginContainer" parent="." unique_id=548819548]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings" unique_id=1785309273]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Settings/VBoxContainer" unique_id=743707626]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="Settings/VBoxContainer" unique_id=1114239319]
+layout_mode = 2
+min_value = -25.0
+max_value = 25.0
+
+[node name="CheckBox" type="CheckBox" parent="Settings/VBoxContainer" unique_id=23710704]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Mute"
+
+[node name="Label" type="Label" parent="Settings/VBoxContainer" unique_id=1215342071]
+layout_mode = 2
+text = "Resolution"
+
+[node name="Resolutions" type="OptionButton" parent="Settings/VBoxContainer" unique_id=1491781842]
+layout_mode = 2
+selected = 2
+item_count = 5
+popup/item_0/text = "3840x2160"
+popup/item_0/id = 3
+popup/item_1/text = "2560x1440"
+popup/item_1/id = 2
+popup/item_2/text = "1920x1080"
+popup/item_2/id = 0
+popup/item_3/text = "1600x900"
+popup/item_3/id = 1
+popup/item_4/text = "1280x720"
+popup/item_4/id = 4
+
+[node name="Label3" type="Label" parent="Settings/VBoxContainer" unique_id=1763296723]
+layout_mode = 2
+text = "Fullscreen Mode"
+
+[node name="OptionButton" type="OptionButton" parent="Settings/VBoxContainer" unique_id=1175499500]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Exclusive Fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+
+[connection signal="pressed" from="Pause/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Pause/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Settings/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="toggled" from="Settings/VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="item_selected" from="Settings/VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
+[connection signal="item_selected" from="Settings/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]

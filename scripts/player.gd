@@ -25,7 +25,6 @@ func _physics_process(delta):
 		direction = direction.normalized()
 		$Pivot.basis = Basis.looking_at(direction)
 
-	# test
 	
 	
 	if not is_on_floor():

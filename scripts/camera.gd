@@ -21,9 +21,3 @@ func _input(event: InputEvent):
 		spring_arm.spring_length -= 1
 	if event.is_action_pressed("wheel_down"):
 		spring_arm.spring_length += 1
-	
-	if event.is_action_pressed("mouse_capture_toggle"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
