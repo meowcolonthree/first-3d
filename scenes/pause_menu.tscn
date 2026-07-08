@@ -47,9 +47,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
+offset_left = 376.0
 offset_top = 64.0
-offset_right = -64.0
+offset_right = -376.0
 offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -66,7 +66,7 @@ layout_mode = 2
 min_value = -25.0
 max_value = 25.0
 
-[node name="CheckBox" type="CheckBox" parent="Settings/VBoxContainer" unique_id=23710704]
+[node name="Muted" type="CheckBox" parent="Settings/VBoxContainer" unique_id=23710704]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -95,7 +95,7 @@ popup/item_4/id = 4
 layout_mode = 2
 text = "Fullscreen Mode"
 
-[node name="OptionButton" type="OptionButton" parent="Settings/VBoxContainer" unique_id=1175499500]
+[node name="FullscreenMode" type="OptionButton" parent="Settings/VBoxContainer" unique_id=1175499500]
 layout_mode = 2
 selected = 0
 item_count = 3
@@ -106,10 +106,24 @@ popup/item_1/id = 1
 popup/item_2/text = "Fullscreen"
 popup/item_2/id = 2
 
+[node name="Control" type="Control" parent="Settings/VBoxContainer" unique_id=1051698352]
+layout_mode = 2
+
+[node name="SaveSettings" type="Button" parent="Settings/VBoxContainer/Control" unique_id=637930534]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 369.0
+offset_right = 1032.0
+offset_bottom = 400.0
+size_flags_vertical = 8
+text = "Save"
+
 [connection signal="pressed" from="Pause/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Pause/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Pause/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Settings/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
-[connection signal="toggled" from="Settings/VBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="Settings/VBoxContainer/Muted" to="." method="_on_muted_toggled"]
 [connection signal="item_selected" from="Settings/VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
-[connection signal="item_selected" from="Settings/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Settings/VBoxContainer/FullscreenMode" to="." method="_on_fullscreen_mode_item_selected"]
+[connection signal="item_selected" from="Settings/VBoxContainer/FullscreenMode" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Settings/VBoxContainer/Control/SaveSettings" to="." method="_on_save_settings_pressed"]
