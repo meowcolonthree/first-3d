@@ -8,6 +8,11 @@ extends Control
 @onready var muted_box: CheckBox = $Settings/VBoxContainer/Muted
 @onready var resolutions_menu: OptionButton = $Settings/VBoxContainer/Resolutions
 @onready var fullscreen_mode_menu: OptionButton = $Settings/VBoxContainer/FullscreenMode
+@onready var fov_slider: HSlider = $Settings/VBoxContainer/FOV
+
+@onready var player: CharacterBody3D = $"../Player"
+
+
 
 var paused = false
 var config = ConfigFile.new()
@@ -16,7 +21,9 @@ func _ready():
 	pause.hide()
 	settings.hide()
 	config.set_value("Player", "Volume", 0)
-	load_settings()
+	var error = load_settings()
+	if error != OK:
+		print("test")
 
 func _on_resume_pressed() -> void:
 	pause_func()
@@ -80,6 +87,12 @@ func _on_fullscreen_mode_item_selected(index: int) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	config.set_value("Player", "FullscreenMode", index)
 
+func _on_fov_value_changed(value: float) -> void:
+	player.change_fov(value)
+	config.set_value("Player", "Fov", value)
+
+
+
 func _on_save_settings_pressed() -> void:
 	save_settings()
 	settings.hide()
@@ -94,16 +107,22 @@ func load_settings():
 	if configload != OK:
 		return
 	for player in config.get_sections():
-		var volume = config.get_value(player, "Volume")
-		var resolution = config.get_value(player, "Resolution")
-		var fullscreenMode = config.get_value(player, "FullscreenMode")
-		var muted = config.get_value(player, "Muted")
+		var volume = config.get_value(player, "Volume", 50)
+		var resolution = config.get_value(player, "Resolution", 2)
+		var fullscreenMode = config.get_value(player, "FullscreenMode", 0)
+		var muted = config.get_value(player, "Muted", false)
+		var fov = config.get_value(player, "Fov", 90)
+
 		_on_volume_value_changed(volume)
 		_on_muted_toggled(muted)
 		_on_resolutions_item_selected(resolution)
 		_on_fullscreen_mode_item_selected(fullscreenMode)
+		_on_fov_value_changed(fov)
+		
 		volume_slider.value = volume
 		muted_box.button_pressed = muted
 		resolutions_menu.selected = resolution
 		fullscreen_mode_menu.selected = fullscreenMode
+		fov_slider.value = fov
+		
 		

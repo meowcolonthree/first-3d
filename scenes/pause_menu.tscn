@@ -106,6 +106,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Fullscreen"
 popup/item_2/id = 2
 
+[node name="Label4" type="Label" parent="Settings/VBoxContainer" unique_id=583996590]
+layout_mode = 2
+text = "FOV"
+
+[node name="FOV" type="HSlider" parent="Settings/VBoxContainer" unique_id=424665528]
+layout_mode = 2
+min_value = 60.0
+max_value = 120.0
+value = 60.0
+
 [node name="Control" type="Control" parent="Settings/VBoxContainer" unique_id=1051698352]
 layout_mode = 2
 
@@ -124,6 +134,7 @@ text = "Save"
 [connection signal="value_changed" from="Settings/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
 [connection signal="toggled" from="Settings/VBoxContainer/Muted" to="." method="_on_muted_toggled"]
 [connection signal="item_selected" from="Settings/VBoxContainer/Resolutions" to="." method="_on_resolutions_item_selected"]
-[connection signal="item_selected" from="Settings/VBoxContainer/FullscreenMode" to="." method="_on_fullscreen_mode_item_selected"]
 [connection signal="item_selected" from="Settings/VBoxContainer/FullscreenMode" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="Settings/VBoxContainer/FullscreenMode" to="." method="_on_fullscreen_mode_item_selected"]
+[connection signal="value_changed" from="Settings/VBoxContainer/FOV" to="." method="_on_fov_value_changed"]
 [connection signal="pressed" from="Settings/VBoxContainer/Control/SaveSettings" to="." method="_on_save_settings_pressed"]

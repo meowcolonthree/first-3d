@@ -2,9 +2,10 @@ extends CharacterBody3D
 
 @export var speed = 40
 @export var jump_impulse = 20
-@export var fall_acceleration = 20
+@export var fall_acceleration = 75
 @export var spring_arm: Node3D
 
+@onready var camera_3d: Camera3D = $SpringArmPivot/Camera3D
 
 var target_velocity = Vector3.ZERO
 
@@ -23,15 +24,21 @@ func _physics_process(delta):
 	direction = direction.rotated(Vector3.UP, spring_arm.rotation.y)
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
-		$Pivot.basis = Basis.looking_at(direction)
-
-	
 	
 	if not is_on_floor():
 		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
-	
+	if target_velocity.y > 0 and is_on_ceiling():
+		target_velocity.y = 0
+		
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
 	
+	
+	
+	
 	velocity = target_velocity
 	move_and_slide()
+	
+	
+func change_fov(value):
+	$SpringArmPivot/Camera3D.fov = value

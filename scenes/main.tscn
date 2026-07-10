@@ -3,11 +3,31 @@
 [ext_resource type="PackedScene" uid="uid://b6ghqkxs7prxe" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://sflc70nn4btf" path="res://scenes/pause_menu.tscn" id="3_jyhfs"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
+sky_top_color = Color(0.027331527, 0.4431741, 0.83509815, 1)
+sky_horizon_color = Color(0.5201651, 0.6163758, 0.7053568, 1)
+ground_horizon_color = Color(0.5201651, 0.6163758, 0.7053568, 1)
+energy_multiplier = 2.1
+
+[sub_resource type="Sky" id="Sky_sugp2"]
+sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_jyhfs"]
+background_mode = 2
+sky = SubResource("Sky_sugp2")
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_2tu2c"]
+size = Vector3(10, 28.50885, 0.30688477)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0wfyh"]
+data = PackedVector3Array(-5, 14.254399, 0.15339999, 5, 14.254399, 0.15339999, -5, -14.254399, 0.15339999, 5, 14.254399, 0.15339999, 5, -14.254399, 0.15339999, -5, -14.254399, 0.15339999, 5, 14.254399, -0.15339999, -5, 14.254399, -0.15339999, 5, -14.254399, -0.15339999, -5, 14.254399, -0.15339999, -5, -14.254399, -0.15339999, 5, -14.254399, -0.15339999, 5, 14.254399, 0.15339999, 5, 14.254399, -0.15339999, 5, -14.254399, 0.15339999, 5, 14.254399, -0.15339999, 5, -14.254399, -0.15339999, 5, -14.254399, 0.15339999, -5, 14.254399, -0.15339999, -5, 14.254399, 0.15339999, -5, -14.254399, -0.15339999, -5, 14.254399, 0.15339999, -5, -14.254399, 0.15339999, -5, -14.254399, -0.15339999, 5, 14.254399, 0.15339999, -5, 14.254399, 0.15339999, 5, 14.254399, -0.15339999, -5, 14.254399, 0.15339999, -5, 14.254399, -0.15339999, 5, 14.254399, -0.15339999, -5, -14.254399, 0.15339999, 5, -14.254399, 0.15339999, -5, -14.254399, -0.15339999, 5, -14.254399, 0.15339999, 5, -14.254399, -0.15339999, -5, -14.254399, -0.15339999)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_qnpof"]
 size = Vector3(60, 1, 60)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2els"]
-albedo_color = Color(0.9372549, 0.7490196, 1, 1)
+albedo_color = Color(0.1179566, 0.19649631, 0.016125005, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qnpof"]
 material = SubResource("StandardMaterial3D_g2els")
@@ -15,18 +35,31 @@ size = Vector3(60, 1, 60)
 
 [node name="Main" type="Node" unique_id=953906543]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1868763152]
+environment = SubResource("Environment_jyhfs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=917565632]
+transform = Transform3D(1, 0, 0, 0, 0.6487478, 0.7610035, 0, -0.7610035, 0.6487478, 0, 9.394891, -12.26971)
+mesh = SubResource("BoxMesh_2tu2c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=1897293085]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=181218533]
+shape = SubResource("ConcavePolygonShape3D_0wfyh")
+
 [node name="Floor" type="StaticBody3D" parent="." unique_id=767798816]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=2077052950]
 shape = SubResource("BoxShape3D_qnpof")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=477455603]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=477455603]
 mesh = SubResource("BoxMesh_qnpof")
 
 [node name="Player" parent="." unique_id=1401245643 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0013094, 4.019129, 19.6664)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0013094, 2.5158396, 11.837558)
+safe_margin = 0.002
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=699293046]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 43, 0)
+transform = Transform3D(1, 0, 0, 0, 0.41458893, 0.9100088, 0, -0.9100088, 0.41458893, 0, 43, 19.376915)
 
 [node name="PauseMenu" parent="." unique_id=2130924713 instance=ExtResource("3_jyhfs")]
